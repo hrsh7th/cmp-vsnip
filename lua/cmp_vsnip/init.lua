@@ -7,7 +7,7 @@ source.new = function()
 end
 
 source.get_keyword_pattern = function()
-  return '.'
+  return '\\w\\+\\|[^[:alnum:]]'
 end
 
 source.complete = function(_, request, callback)
