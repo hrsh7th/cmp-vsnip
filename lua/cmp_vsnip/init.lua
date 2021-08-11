@@ -6,6 +6,10 @@ source.new = function()
   return setmetatable({}, { __index = source })
 end
 
+source.is_available = function()
+  return vim.g.loaded_vsnip
+end
+
 source.get_keyword_pattern = function()
   return '\\w\\+\\|[^[:alnum:]]'
 end
