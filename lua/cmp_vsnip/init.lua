@@ -11,7 +11,7 @@ source.is_available = function()
 end
 
 source.get_keyword_pattern = function()
-  return '\\w\\+\\|[^[:alnum:][:blank:]]'
+  return '\\%(\\w\\+\\|[^[:alnum:]]\\)'
 end
 
 source.complete = function(_, request, callback)
