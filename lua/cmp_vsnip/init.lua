@@ -58,9 +58,10 @@ source.resolve = function(_, completion_item, callback)
 end
 
 source._get_text_edit = function(_, params, prefix, snippet)
-  local chars = vim.fn.split(prefix, [[\zs]])
+  local chars = vim.fn.split(vim.fn.escape(prefix, [[\/?]]), [[\zs]])
   local chars_pattern = [[\%(\V]] .. table.concat(chars, [[\m\|\V]]) .. [[\m\)]]
-  local whole_pattern = ([[\<\V%s\m[%s]*$]]):format(chars[1], chars_pattern)
+  local separator = chars[1]:match('%a') and [[\<]] or ''
+  local whole_pattern = ([[%s\V%s\m%s*$]]):format(separator, chars[1], chars_pattern)
   local regex = vim.regex(whole_pattern)
   local s, e = regex:match_str(params.context.cursor_before_line)
   if not s then
